@@ -659,6 +659,7 @@ MonoBehaviour:
   platformPrefab: {fileID: 1078002147203996067, guid: a36057a1deb555c4398796a9b64eca5e,
     type: 3}
   player: {fileID: 1058853344}
+  platformDistance: 7
 --- !u!4 &1485122684
 Transform:
   m_ObjectHideFlags: 0
@@ -886,17 +887,17 @@ PrefabInstance:
     - target: {fileID: 5182074720566410041, guid: 8bf1410c8e5cb2846b28b25f7c94b3b7,
         type: 3}
       propertyPath: jumpVelocity
-      value: 23
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 5182074720566410041, guid: 8bf1410c8e5cb2846b28b25f7c94b3b7,
         type: 3}
       propertyPath: moveSpeed
-      value: 110
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 5182074720566410041, guid: 8bf1410c8e5cb2846b28b25f7c94b3b7,
         type: 3}
       propertyPath: movementSmoothingAmount
-      value: 0.15
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5182074720566410042, guid: 8bf1410c8e5cb2846b28b25f7c94b3b7,
         type: 3}
@@ -957,6 +958,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182074720566410046, guid: 8bf1410c8e5cb2846b28b25f7c94b3b7,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bf1410c8e5cb2846b28b25f7c94b3b7, type: 3}
