@@ -14,7 +14,6 @@ public class PlatformController : MonoBehaviour
     {
         if (player.transform.position.y > 30)
         {
-            Debug.Log("Game started");
             Destroy(gameObject, 5f);
         }
     }

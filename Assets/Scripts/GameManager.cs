@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject platformPrefab;
     public GameObject player;
+    [SerializeField]
+    float platformDistance = 10f;
 
     private const float MIN_PLATFORM_WIDTH = 3f;
     private const float MAX_PLATFORM_WIDTH = 10f;
@@ -23,7 +25,7 @@ public class GameManager : MonoBehaviour
             Vector3 platformScale = platform.transform.localScale;
             platformScale.x = platformWidth;
             platform.transform.localScale = platformScale;
-            lastPlatformY += 5;
+            lastPlatformY += platformDistance;
         }
     }
 }

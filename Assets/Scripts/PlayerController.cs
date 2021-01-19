@@ -3,9 +3,9 @@ using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] public float moveSpeed = 40f;
-    [SerializeField] private float jumpVelocity = 400f;
-    [Range(0, .3f)] [SerializeField] private float movementSmoothingAmount = .05f;
+    [SerializeField] public float moveSpeed = 1000f;
+    [SerializeField] private float jumpVelocity = 34f;
+    [Range(0, 1f)] [SerializeField] private float movementSmoothingAmount = .05f;
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private Transform groundCheck;
 
@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     public void Move(float move)
     {
         // Move the character by finding the target velocity
-        Vector3 targetVelocity = new Vector2(move * 10f, rb2d.velocity.y);
+        Vector3 targetVelocity = new Vector2(move, rb2d.velocity.y);
         // And then smoothing it out and applying it to the character
         rb2d.velocity = Vector3.SmoothDamp(rb2d.velocity, targetVelocity, ref currentVelocity, movementSmoothingAmount);
 
@@ -62,11 +62,26 @@ public class PlayerController : MonoBehaviour
         if (move > 0 && !facingRight) Flip();
         else if (move < 0 && facingRight) Flip();
 
-        if (isGrounded && rb2d.velocity.y <= 0)
+        float maxSpeed = moveSpeed * Time.fixedDeltaTime;
+
+        if (isGrounded && rb2d.velocity.y <= 0 && rb2d.velocity.x >= maxSpeed * 0.9f)
         {
+            Debug.Log("0.75 JUMP");
+            rb2d.velocity = new Vector2(rb2d.velocity.x, jumpVelocity * (1 + (Mathf.Abs(rb2d.velocity.x) / (maxSpeed * 0.75f))));
             isGrounded = false;
-            rb2d.velocity = new Vector2(rb2d.velocity.x, jumpVelocity * (1 + (Mathf.Abs(rb2d.velocity.x) / (moveSpeed * 0.1f))));
         }
+        else if (isGrounded && rb2d.velocity.y <= 0 && rb2d.velocity.x >= maxSpeed * 0.2f)
+        {
+            Debug.Log("0.25 JUMP");
+            rb2d.velocity = new Vector2(rb2d.velocity.x, jumpVelocity * (1 + (Mathf.Abs(rb2d.velocity.x) / maxSpeed)));
+            isGrounded = false;
+        }
+        else if (isGrounded && rb2d.velocity.y <= 0)
+        {
+            rb2d.velocity = new Vector2(rb2d.velocity.x, jumpVelocity);
+            isGrounded = false;
+        }
+
     }
 
 
